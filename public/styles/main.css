@@ -1,0 +1,12 @@
+html {
+  font-size: 14px; /* or 12px, adjust as you like */
+}
+
+.row {
+  margin-top: 0 !important;
+  margin-right: 0 !important;
+}
+
+.dark-form {
+  background-color: rgba(255, 255, 255, 0.803) !important;
+}
