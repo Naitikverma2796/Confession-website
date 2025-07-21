@@ -12,54 +12,58 @@
 
 <%- include("partials/header.ejs") %>
 
-    <% if (locals.postId) {  %>
-        <div class="content col-12 col-xxl-8 p-4 p-4">
-          <h1 class="pt-serif">Edit Post</h1>
-          <form action="/update" method="post">
-            <div class="content m-5 " style="background-color: rgba(0, 0, 0, 0.078); border-radius: 10px;">
-              <div class="mb-3 p-4 ">
-                <label for="exampleFormControlInput1" class="form-label">Title for your Blog</label>
-                <input type="text" class="form-control dark-form" id="titleForBlog" required placeholder="Add Title" name="title" value="<%= title %>">
-              </div>
-              <div class="mb-3 p-4 ">
-                <label for="exampleFormControlTextarea1" class="form-label">Add Post</label>
-                <textarea class="form-control dark-form" id="postTextArea" required placeholder="Start text..." rows="10" style="resize: none;" name="content"><%= content %></textarea>
-                <input hidden type="text" name="index" value="<%= postId %>">
-                <div class="text-end m-2">
-                  <input class="btn btn-dark btn-lg px-4 gap-3" type="submit" value="Update Post">
-                </div>
+  <% if (locals.postId) {  %>
+      <div class="content col-12 col-xxl-8 p-4 p-4">
+        <h1 class="pt-serif">Edit Post</h1>
+        <form action="/update" method="post">
+          <div class="content m-5 " style="background-color: rgba(0, 0, 0, 0.078); border-radius: 10px;">
+            <div class="mb-3 p-4 ">
+              <label for="exampleFormControlTextarea1" class="form-label">Add Post</label>
+              <textarea class="form-control dark-form" id="postTextArea" required placeholder="Start text..." rows="10" style="resize: none;" name="content"><%= content %></textarea>
+              <input hidden type="text" name="index" value="<%= postId %>">
+              <div class="text-end m-2">
+                <input class="btn btn-dark btn-lg px-4 gap-3" type="submit" value="Update Post">
               </div>
             </div>
-          </form>
-        </div>
-    <% } else {  %>
-
-          <div class= "content m-5 p-2" style="background-color: rgba(0, 0, 0, 0.078); border-radius: 10px;">
-            <p>•Go on, post that quirky thought you've been nurturing in your mind - the internet's a wild jungle, and your ideas are like glitter in the foliage! 🌟🌿</p>
           </div>
-
-          <form action="/save" method="post">
-            <div class="content m-5 " style="background-color: rgba(0, 0, 0, 0.078); border-radius: 10px;">
-              <div>
-                <div class="mb-3 p-4 ">
-                  <label for="exampleFormControlInput1" class="form-label">Title for your Blog</label>
-                  <input type="text" class="form-control dark-form" id="titleForBlog" required placeholder="Add Title" name="title">
-                </div>
-              </div>
-              <div class="mb-3 p-4 ">
-                <label for="exampleFormControlTextarea1" class="form-label">Add Post</label>
-                <textarea class="form-control dark-form" id="postTextArea" required placeholder="Start text..." rows="10" style="resize: none;" name="content"></textarea>
-                <div class="text-end m-2">
-                  <input class="btn btn-outline-dark btn-lg px-4 gap-3" type="submit" value="Create Post">
-                </div>
-              </div>
-            </div>
-          </form>
-
-    <% }  %>
+        </form>
+      </div>
+  <% } else {  %>
 
 
-<%- include("partials/footer.ejs") %>
+  <form action="/save" method="post">
+    <div class="content m-5 " style="background-color: rgba(0, 0, 0, 0.078); border-radius: 10px;">
+      <div>
+        <div class="mb-3 p-4 ">
+          <label for="exampleFormControlInput1" class="form-label">Name of the Room</label>
+          <input type="text" class="form-control dark-form" id="titleForBlog" required placeholder="Add Title" name="title">
+        </div>
+      </div>
+      <div class="mb-3 p-4 ">
+        <label for="exampleFormControlTextarea1" class="form-label">Room ID</label>
+        <!-- Visible readonly input to show the roomId -->
+        <input type="text" class="form-control" id="roomIdVisible" value="<%= roomId %>" readonly />
+
+        <!-- Hidden input to send the roomId in the POST request -->
+        <input type="hidden" name="roomId" value="<%= roomId %>" />
+        <div class="text-end m-2 mt-5">
+          <input class="btn btn-outline-dark btn-lg px-4 gap-3" type="submit" value="Create Room">
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <% }  %>
+
+
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top bg-dark fixed-bottom" data-bs-theme="dark">
+    <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+            <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+        <span class="mb-3 mb-md-0" style="color: #D6D9DB ;">© 2025 India, Inc</span>
+    </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 

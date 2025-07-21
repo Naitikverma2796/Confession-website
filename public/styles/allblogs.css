@@ -1,0 +1,70 @@
+ body, html {
+    height: 100%;
+    margin: 0;
+    }
+
+.fixed-sidebar {
+    position: fixed;
+    top: 70px;
+    bottom: 100px;
+    height: 100vh;
+    padding: 20px;
+    /* margin: 10px; */
+    border-radius: 5px;
+}
+
+.left-sidebar {
+    left: 0;
+    width: 25%;
+    background-color: rgba(0, 0, 0, 0.078);
+}
+
+.right-sidebar {
+    right: 0;
+    width: 25%;
+    background-color: rgba(0, 0, 0, 0.078);
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    margin-top: 90px;
+    height: 75vh;
+    padding: 20px;
+    background-color: #f8f9fa;
+background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
+}
+
+.content-box {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px; /* optional, to avoid scrollbar overlapping content */
+}
+
+.input-group {
+    flex-shrink: 0;          /* prevents shrinking */
+}
+
+.main-content-mobile-screen {
+    display: flex;
+    flex-direction: column;
+    height: 67vh;
+    padding: 20px;
+    background-color: #f8f9fa;
+    background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
+}
+
+.content-box-mobile {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.mobile-input-bar {
+  position: fixed;
+  bottom: 90px;
+  left: 60px;
+  right: 60px;
+  border-radius: 10px;
+}

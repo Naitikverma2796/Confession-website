@@ -6,33 +6,175 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
     <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/allblogs.css">
     <title>Document</title>
 </head>
 <body>
 
-<%- include("partials/header.ejs") %>
+<nav class="navbar navbar-expand bg-dark border-bottom border-body fixed-top" data-bs-theme="dark">
+  <nav class="navbar navbar-expand-lg  navbar-dark">
+  <div class="container-fluid"> 
+    <a class="navbar-brand fs-3" ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-earmark" viewBox="0 0 16 16">
+    <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/></svg>T<u>room</u></a>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/Home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/Contacts">Contact Me</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  </nav>
+</nav>
 
-<div class="container my-5">
-    <div class="row flex-row justify-content-evenly">
-        <div class="content col-12 col-xxl-8 col-xl-8 p-4">
-            <% if (posts.length === 0) { %>
+
+
+
+<div class="d-md-none p-5 mt-5">
+  <!-- Nav underline tabs -->
+  <ul class="nav nav-underline" id="mobileTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="chat-tab" data-bs-toggle="tab" data-bs-target="#chat" type="button" role="tab" aria-controls="chat" aria-selected="true">Chat</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="room-tab" data-bs-toggle="tab" data-bs-target="#room" type="button" role="tab" aria-controls="room" aria-selected="false">Room Details</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="participants-tab" data-bs-toggle="tab" data-bs-target="#participants" type="button" role="tab" aria-controls="participants" aria-selected="false">Participants</button>
+    </li>
+  </ul>
+
+  <!-- Tab Content -->
+  <div class="tab-content" style="height: 70vh; overflow-y: auto; margin-top: 10px;">
+    <div class="tab-pane fade show active" id="chat" role="tabpanel" aria-labelledby="chat-tab">
+      <!-- Chat Content -->
+      <div class="main-content-mobile-screen" style="background-color: #f8f9fa; border-radius: 10px; padding: 10px;">
+        <div class="content-box-mobile">
+        <% if (posts.length === 0) { %>
+          <div class="text-center">
+            <h5>So empty here... 😟</h5>
+          </div>
+        <% } else { %>
+          <ul class="p-0" style="list-style-type: none;">
+            <% posts.forEach((post) => { %>
+              <li class="p-1">
+                <p class="fs-6 fw-light"><%= post.date %></p>
+                <p class="fs-5 my-4">
+                  <a href="/view/<%= post.id %>" style="color: black; text-decoration: none;"><%= post.content %></a>
+                </p>
+                <hr>
+              </li>
+            <% });  %>
+          </ul>
+        <% }  %>
+
+        <form action="/add" method="post" class="mobile-input-bar">
+          <div class="input-group mt-3">
+            <input type="text" class="form-control" placeholder="Type here..." aria-label="Recipient’s username" aria-describedby="button-addon2" name="content" required>
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+              <!-- send icon SVG -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+              </svg>
+            </button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="room" role="tabpanel" aria-labelledby="room-tab">
+      <!-- Room Details Tab -->
+      <div class="p-3" style="background-color: rgba(0, 0, 0, 0.078); border-radius: 10px; margin-top: 10px;">
+        <h4><%= title %></h4>
+        <p><%= roomId %> </p>
+        <!-- Add more room details here if you have -->
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="participants" role="tabpanel" aria-labelledby="participants-tab">
+      <!-- Participants Tab -->
+      <div class="p-3" style="background-color: rgba(0, 0, 0, 0.078); border-radius: 10px; margin-top: 10px;">
+        <h4>Participants</h4>
+        <% if (participants && participants.length > 0) { %>
+          <% participants.forEach(participant => { %>
+            <p><%= participant.username %></p>
+            <hr>
+          <% }); %>
+        <% } else { %>
+          <p>No Participants yet... 😟</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row g-0 d-none d-md-flex">
+    <div class="col-md-3">
+      <div class="fixed-sidebar left-sidebar">
+        <ul class="p-0" style="list-style-type: none;">
+          <li class="p-1">
+            <h3><%= title %></h3>
+            <p><%= roomId %></p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="main-content" style="border-radius: 10px;">
+        <div class="content-box">
+          <% if (posts.length === 0) { %>
                 <div class="text-center">
                     <h3>So empty here... 😟</h3>
-                    <button onclick="window.location.href='/edit-blog';" type="button" class="btn btn-outline-secondary btn-lg px-4 gap-3 m-4" fdprocessedid="gbzs5">Add Blog</button> 
                 </div>
             <% } else {  %>
                 <ul class="p-0" style="list-style-type: none;">
             <%      posts.forEach((post) => { %>
                     <li class="p-1">
                         <p class="fs-6 fw-light"><%= post.date %></p>
-                        <h3 class="fs-2 pt-serif" ><a href="/view/<%= posts.indexOf(post) %>" style="color: black; text-decoration: none;"><%= post.title %></a></h3>
-                        <p class="fs-5 my-4"><%= post.content %></p>
+                        <p class="fs-5 my-4"><a href="/view/<%= post.id %>" style="color: black; text-decoration: none;"><%= post.content %></a></p>
                         <hr>
                     </li>
             <%     });  %>
                 </ul>
             <% }  %>
         </div>
+        <form action="/add" method="post">
+            <div class="input-group mt-3 ">
+            <input type="text" class="form-control" placeholder="Type here..." aria-label="Recipient’s username" aria-describedby="button-addon2" name="content" required>
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                    <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+                </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="fixed-sidebar right-sidebar">
+        <ul class="p-0" style="list-style-type: none;">
+          <li class="p-1">
+            <h3>Paricipants</h3>
+            <% if (participants && participants.length > 0) { %>
+                <%    participants.forEach(participant => {    %>
+                  <p>  <%= participant.username %>  </p>
+                  <hr>
+                <%    });      %>
+            <%  } else { %>
+              <div class="text-center">
+                <p>No Pariticipants yet... 😟</p>
+              </div>
+            <%    }    %>
+          </li>
+        </ul>
+      </div>
     </div>
 </div>
 
