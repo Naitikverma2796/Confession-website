@@ -25,45 +25,6 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 db.connect();
 
-// Post Constructor
-// function Post(content) {
-//     this.content = content;
-//     this.rawDate = new Date();
-//     this.date = this.rawDate.toLocaleString('en-GB', {
-//   weekday: 'long',   // Adds the day name
-//   day: '2-digit',
-//   month: 'long',
-//   year: 'numeric',
-//   hour: '2-digit',
-//   minute: '2-digit',
-//   second: '2-digit',
-//   hour12: true       // AM/PM format
-// });
-// }
-
-// Add Post
-// function addPost(content) {
-//     let post = new Post(content);
-//     posts.push(post);
-// }
-
-// // Delete Post
-// function deletePost(index) {
-//     posts.splice(index, 1);
-// }
-
-// // Edit Post
-// function editPost(index, content) {
-//     posts[index] = new Post(content);
-// }
-
-// app.post("/add", (req, res) => {
-//     let content = req.body["content"];
-    
-//     addPost(content);
-//     res.redirect("/view-blog");
-// });
-
 app.post("/save", async(req,res) => {
   const title = req.body["title"];
   const roomId = req.body.roomId;
