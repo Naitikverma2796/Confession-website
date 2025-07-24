@@ -1,4 +1,4 @@
-# Blogging Website - T<u>room</u> 📝
+# Blogging Website📝
 
 A simple full-stack blogging website built with Node.js, Express, PostgreSQL, and EJS. Users can write, edit, and view blog posts.
 
